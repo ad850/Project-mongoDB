@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: cornsilk;
+      }
+
+      .box {
+        width: 276px;
+        height: 400px;
+        background-color: #87ceeb;
+        border: 1px solid black;
+        border-radius: 20px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        gap: 20px;
+      }
+
+      #Weather {
+        margin-top: 12px;
+        text-align: center;
+        font-size: 5em;
+      }
+      .info {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .temp {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: 100;
+      }
+    </style>
+
+    <title>Weather app</title>
+  </head>
+  <body id="container">
+    <div class="box">
+      <div id="Weather">
+        <i class="fas fa-sun" style="color: #eccc68"></i>
+      </div>
+      <div class="info">
+        <h2 class="location">
+          <i class="fas fa-street-view" style="color: #fff"></i
+          >{%location%},{%country%}
+        </h2>
+
+        <p id="date"></p>
+        <h1 class="temp">{%tempval%}&deg;C</h1>
+        <h3 class="temp min_max">
+          MIN {%tempmin%}&deg;C | Max {%tempmax%}&deg;C
+        </h3>
+
+        <button id="butt">click</button>
+      </div>
+    </div>
+
+    <script>
+   
+      const curDate = document.getElementById("date");
+      const weathercon = document.getElementById("Weather");
+      const tempStatus = "{%tempstatus%}";
+      if (tempstatus === "Sunny") {
+        weathercon.innerHTML = `<i class="fas fa-sun" style="color: #eccc68"></i>`;
+      } else if ("Clouds") {
+        weathercon.innerHTML = `<i class="fas fa-cloud"  style="color:#f1f2f6;"></i>`;
+      }
+
+      const getcurrentday = () => {
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Mon";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+        var currenttime = new Date();
+        var day = weekday[currenttime.getDay()];
+
+        return day;
+      };
+      const currenttime = () => {
+        var months = [
+          "jan",
+          "fab",
+          "amrch",
+          "aprail",
+          "may",
+          "jun",
+          "july",
+          "aug",
+          "sep",
+          "oct",
+          "nov",
+          "dec",
+        ];
+
+        var now = new Date();
+        var month = months[now.getMonth() + 1]; //months from 1-12
+        var date = now.getDate();
+
+        console.log(month);
+
+        let hour = now.getHours();
+        let miniuts = now.getMinutes();
+
+        let periods = "Am";
+
+        if (hour > 11) {
+          periods = "PM";
+
+          if (hour > 12) {
+            hour -= -12;
+          }
+          if (mini < 10) {
+            mini = "0" + mini;
+          }
+        }
+
+        return ` ${month} ${date} |  ${hour}:${mini}${periods}`;
+      };
+
+      curDate.innerHTML = getcurrentday() + "|" + currenttime();
+    </script>
+
+    <script src="index.js"></script>
+  </body>
+</html>
